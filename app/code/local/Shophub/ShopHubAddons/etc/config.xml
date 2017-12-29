@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Shophub_ShopHubAddons>
+            <version>0.0.1</version>
+        </Shophub_ShopHubAddons>
+    </modules>
+
+    <global>
+        <helpers>
+            <shophubconnector>
+                <rewrite>
+                    <connector_orderExport>Shophub_ShopHubAddons_Helper_OrderExport</connector_orderExport>
+                </rewrite>
+            </shophubconnector>
+        </helpers>
+        <resources>
+            <shophubaddons_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </shophubaddons_write>
+            <shophubaddons_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </shophubaddons_read>
+        </resources>
+    </global>
+
+</config>

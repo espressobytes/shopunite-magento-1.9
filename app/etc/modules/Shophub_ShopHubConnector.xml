@@ -1,0 +1,9 @@
+<?xml version = "1.0"?>
+<config>
+	<modules>
+		<Shophub_ShopHubConnector>
+			<active>true</active>
+			<codePool>local</codePool>
+		</Shophub_ShopHubConnector>
+	</modules>
+</config>
