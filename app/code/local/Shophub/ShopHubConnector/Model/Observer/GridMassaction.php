@@ -11,7 +11,7 @@ class Shophub_ShopHubConnector_Model_Observer_GridMassaction extends Mage_Core_M
                 && $block->getRequest()->getControllerName() == 'sales_order')
             {
                 $block->addItem('newmodule', array(
-                    'label' => 'Export to Shophub',
+                    'label' => 'Export to ShopUnite',
                     'url' => Mage::app()->getStore()->getUrl('shophubconnector/ordergrid/exportorders'),
                 ));
             }

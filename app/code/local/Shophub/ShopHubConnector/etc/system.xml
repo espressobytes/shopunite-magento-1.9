@@ -40,7 +40,7 @@
                     <fields>
                         <apiurl translate="label comment">
                             <label>API-URL</label>
-                            <comment><![CDATA[The API-URl of your ShopUnite-System <br>Default: www.shop-hub.net/api/v1]]></comment>
+                            <comment><![CDATA[The API-URl of your ShopUnite-System <br>Default: https://app.shopunite.net/api/v1]]></comment>
                             <frontend_type>text</frontend_type>
                             <sort_order>10</sort_order>
                             <show_in_default>1</show_in_default>

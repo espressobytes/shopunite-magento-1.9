@@ -35,7 +35,8 @@ $installer->run("
 $installer->endSetup();
 
 
-
+// TODO: APILOG: for next version change column error_message to TEXT
+// TODO: APILOG: add a column naming the current version of the extension
 
 
 

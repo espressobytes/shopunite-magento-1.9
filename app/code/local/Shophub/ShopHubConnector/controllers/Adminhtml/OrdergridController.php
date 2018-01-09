@@ -1,6 +1,6 @@
 <?php
 
-class Shophub_ShopHubConnector_OrdergridController extends Mage_Adminhtml_Controller_Action
+class Shophub_ShopHubConnector_Adminhtml_OrdergridController extends Mage_Adminhtml_Controller_Action
 {
 
     /**
@@ -66,7 +66,7 @@ class Shophub_ShopHubConnector_OrdergridController extends Mage_Adminhtml_Contro
     private function buildSuccessMessageFromResponse($order, $response) {
         try {
             $responseData = json_decode($response, true);
-            $msg = 'Order: ' . $order->getIncrementId() . ' - shophub-id ' . $responseData['order_id'];
+            $msg = 'Order: ' . $order->getIncrementId() . ' - shopunite-id ' . $responseData['order_id'];
             if (isset($responseData['target_order_id'])) {
                 $msg .= ' - ext-id: ' . $responseData['target_order_id'];
             }

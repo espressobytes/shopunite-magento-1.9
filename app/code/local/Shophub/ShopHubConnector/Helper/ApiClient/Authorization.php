@@ -13,7 +13,7 @@ class Shophub_ShopHubConnector_Helper_ApiClient_Authorization extends Shophub_Sh
     protected $tokenStatusCode;
 
     /** @var string */
-    protected $errorMessage;
+    protected $errorMessage = "";
 
     /** @var string */
     protected $token;
@@ -33,6 +33,10 @@ class Shophub_ShopHubConnector_Helper_ApiClient_Authorization extends Shophub_Sh
         $this->apiUrl = $this->getConfigValue('general/apiurl');
     }
 
+    /**
+     * @param bool $generateNewToken
+     * @return bool|string
+     */
     public function getValidToken($generateNewToken = false)
     {
         $lastTokenObj = $this->getLastTokenObj();
@@ -105,17 +109,58 @@ class Shophub_ShopHubConnector_Helper_ApiClient_Authorization extends Shophub_Sh
         $errors = curl_error($curl);
         curl_close($curl);
 
-        // check response:
+        // if that method did not work, try to get token with alternative method:
         if ($this->tokenStatusCode != 200) {
-            // TODO: log error
-            $this->errorMessage = "Error: Could authorize to route $serviceUrl. Response status code: " . $this->tokenStatusCode;
-            return false;
+
+            $this->errorMessage = "Error: Could not authorize to route $serviceUrl. Response status code: " . $this->tokenStatusCode;
+            $this->errorMessage .= ". Curl-Response: " . json_encode($curlResponse);
+            $curlErrorStr = isset($errors) ? json_encode($errors) : 'not set';
+            $this->errorMessage .= ". Curl-Errors: " . $curlErrorStr;
+
+            $curl = curl_init($serviceUrl);
+            curl_setopt($curl, CURLOPT_TIMEOUT, $this->curlTimeout);
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+            curl_setopt($curl, CURLOPT_POSTFIELDS, "");
+            curl_setopt($curl, CURLOPT_HEADER, false);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+                'Accept: application/json',
+                'Content-Type: application/json',
+                'Authorization: Basic ' . base64_encode($this->apiUsername . ":" . $password)
+            ));
+
+            // try new curl-options
+            curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+
+            $curlResponse = curl_exec($curl);
+            $contentType = curl_getinfo($curl, CURLINFO_CONTENT_TYPE);
+            $this->tokenStatusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+            $errors = curl_error($curl);
+            curl_close($curl);
+
+            // check final response:
+            if ($this->tokenStatusCode != 200) {
+                // TODO: log error
+                $this->errorMessage .= " --- Second try to get token failed as well! Details: ";
+                $this->errorMessage .= "Curl-Response: " . json_encode($curlResponse);
+                $curlErrorStr = isset($errors) ? json_encode($errors) : 'not set';
+                $this->errorMessage .= " --- Curl-Errors: " . $curlErrorStr;
+                return false;
+            } else {
+                $this->errorMessage = "";
+            }
         }
+
         $responseArr = json_decode($curlResponse, true);
 
         // Extract Token:
         if (!isset($responseArr['token'])) {
             $this->errorMessage = "Error: Token not send in response";
+            $this->errorMessage .= ". Curl-Response: " . $curlResponse;
+            $curlErrorStr = isset($errors) ? json_encode($errors) : 'not set';
+            $this->errorMessage .= ". Curl-Errors: " . $curlErrorStr;
             return false;
         }
         $token = $responseArr['token'];
@@ -131,6 +176,10 @@ class Shophub_ShopHubConnector_Helper_ApiClient_Authorization extends Shophub_Sh
         return $token;
     }
 
+    /**
+     * @return mixed
+     * @throws Exception
+     */
     public function saveTokenToDb()
     {
         /** @var $accessTokenModel Shophub_ShopHubConnector_Model_AccessToken */

@@ -3,7 +3,7 @@
 
     <modules>
         <Shophub_ShopHubConnector>
-            <version>1.0.6</version>
+            <version>1.0.8</version>
         </Shophub_ShopHubConnector>
     </modules>
 
@@ -43,7 +43,7 @@
             <shophubconnector_admin>
                 <use>admin</use>
                 <args>
-                    <module>Shophub_ShopHubConnector</module>
+                    <module>Shophub_ShopHubConnector_Adminhtml</module>
                     <frontName>shophubconnector</frontName>
                 </args>
             </shophubconnector_admin>
@@ -111,6 +111,24 @@
     </global>
 
     <adminhtml>
+        <menu>
+            <shophubconnector>
+                <title>ShopUnite</title>
+                <sort_order>1000</sort_order>
+                <children>
+                    <item100>
+                        <title>Api Log</title>
+                        <sort_order>100</sort_order>
+                        <action>shophubconnector/apilog</action>
+                    </item100>
+                    <item200>
+                        <title>Configuration</title>
+                        <sort_order>200</sort_order>
+                        <action>adminhtml/system_config/edit/section/shophubconnector_settings</action>
+                    </item200>
+                </children>
+            </shophubconnector>
+        </menu>
         <events>
             <core_block_abstract_prepare_layout_before>
                 <observers>
@@ -134,7 +152,7 @@
     <default>
         <shophubconnector_settings>
             <general>
-                <apiurl>app.shopunite.net/api/V1</apiurl>
+                <apiurl>https://app.shopunite.net/api/v1</apiurl>
                 <password backend_model="adminhtml/system_config_backend_encrypted"/>
                 <interface_ref_id>0</interface_ref_id>
             </general>

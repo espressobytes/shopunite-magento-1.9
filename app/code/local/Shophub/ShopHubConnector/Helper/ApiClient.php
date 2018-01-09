@@ -52,7 +52,11 @@ class Shophub_ShopHubConnector_Helper_ApiClient extends Shophub_ShopHubConnector
         // Get Token from authorization class (parent)
         $token = $this->getValidToken();
         if (!$token) {
-            $this->logErrorAndSave('No valid Token');
+            $logMessage = 'No valid Token.';
+            if ($this->errorMessage) {
+                $logMessage .= " " . $this->errorMessage;
+            }
+            $this->logErrorAndSave($logMessage);
             return false;
         }
 
