@@ -2,6 +2,10 @@
 
 class Shophub_ShopHubConnector_Block_Adminhtml_Apilog_ShowItem extends Mage_Adminhtml_Block_Widget_Form
 {
+
+    /**
+     * @return Mage_Adminhtml_Block_Widget_Form
+     */
     protected function _prepareForm()
     {
         $form = new Varien_Data_Form();

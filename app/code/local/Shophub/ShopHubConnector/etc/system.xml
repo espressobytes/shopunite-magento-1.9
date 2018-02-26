@@ -21,7 +21,7 @@
             <groups>
 
                 <information translate="label">
-                    <label>ShopUnite Version</label>
+                    <label>ShopUnite-Connector Version</label>
                     <frontend_type>text</frontend_type>
                     <frontend_model>shophubconnector/system_config_form_versionInformation</frontend_model>
                     <sort_order>10</sort_order>
@@ -128,11 +128,21 @@
                             <comment><![CDATA[Define Curl Time-Out for API-Calls in seconds. Default (if left blank): 30.]]></comment>
                             <frontend_type>text</frontend_type>
                             <validate>validate-number</validate>
-                            <sort_order>10</sort_order>
+                            <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </curl_timeout>
+                        <log_debug_infos translate="label comment">
+                            <label>Logging enabled</label>
+                            <comment><![CDATA[Log debug info into file var/log/shopunite.log (Exceptions are logged anyways).]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>30</sort_order>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </log_debug_infos>
                     </fields>
                 </dev>
 

@@ -6,22 +6,23 @@ class Shophub_ShopHubConnector_Block_Adminhtml_Apilog_Grid extends Mage_Adminhtm
     public function __construct()
     {
         parent::__construct();
-        $this->setId('apiLog_grid');
-        // This is the primary key of the database
-
+        $this->setId('apiLog_grid'); // primary key of the database
         $this->setDefaultSort('id');
         $this->setDefaultDir('DESC');
         $this->setSaveParametersInSession(true);
-        // $this->setUseAjax(true);
     }
 
+    /**
+     * @return string
+     */
     protected function _getCollectionClass()
     {
-        // This is the model we are using for the grid
-        return 'shophubconnector/apiLog';
+        return 'shophubconnector/apiLog'; // model for the grid
     }
 
-
+    /**
+     * @return Mage_Adminhtml_Block_Widget_Grid
+     */
     protected function _prepareCollection()
     {
         $collection = Mage::getModel('shophubconnector/apiLog')->getCollection();;
@@ -29,6 +30,10 @@ class Shophub_ShopHubConnector_Block_Adminhtml_Apilog_Grid extends Mage_Adminhtm
         return parent::_prepareCollection();
     }
 
+    /**
+     * @return $this
+     * @throws Exception
+     */
     protected function _prepareColumns()
     {
 
@@ -73,23 +78,21 @@ class Shophub_ShopHubConnector_Block_Adminhtml_Apilog_Grid extends Mage_Adminhtm
             'index'     => 'error_message',
         ));
 
-        /*
-        $this->addColumn('parameters', array(
-            'header'    => Mage::helper('shophubconnector')->__('Request Parameters'),
-            'index'     => 'parameters',
-        ));
-        */
-
-        // error_log("End _prepareColumns()", 0);
-
         return parent::_prepareColumns();
     }
 
+    /**
+     * @param $row
+     * @return string
+     */
     public function getRowUrl($row)
     {
         return $this->getUrl('*/*/show', array('id' => $row->getId()));
     }
 
+    /**
+     * @return string
+     */
     public function getGridUrl()
     {
         return $this->getUrl('*/*/grid', array('_current'=>true));

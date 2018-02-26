@@ -9,7 +9,6 @@ class Shophub_ShopHubConnector_Block_Adminhtml_Apilog extends Mage_Adminhtml_Blo
         $this->_blockGroup = 'shophubconnector';
         $this->_controller = 'adminhtml_apilog';
         $this->_headerText = 'ShopUnite Api Log';
-
     }
 
 }

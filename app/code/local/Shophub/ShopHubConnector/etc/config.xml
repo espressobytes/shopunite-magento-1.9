@@ -3,7 +3,7 @@
 
     <modules>
         <Shophub_ShopHubConnector>
-            <version>1.0.8</version>
+            <version>1.1.5</version>
         </Shophub_ShopHubConnector>
     </modules>
 
@@ -162,10 +162,9 @@
             <dev>
                 <apilog_max_size>100</apilog_max_size>
                 <curl_timeout>30</curl_timeout>
+                <logging_enabled>0</logging_enabled>
             </dev>
         </shophubconnector_settings>
     </default>
-
-    <!-- TODO: Use an own api to create a configurable product -->
 
 </config>
