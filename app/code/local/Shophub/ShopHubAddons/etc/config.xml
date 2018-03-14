@@ -13,6 +13,11 @@
                     <connector_orderExport>Shophub_ShopHubAddons_Helper_OrderExport</connector_orderExport>
                 </rewrite>
             </shophubconnector>
+            <shophubconnector>
+                <rewrite>
+                    <connector_externalOrderInfo>Shophub_ShopHubAddons_Helper_ExternalOrderInfo</connector_externalOrderInfo>
+                </rewrite>
+            </shophubconnector>
         </helpers>
         <resources>
             <shophubaddons_write>

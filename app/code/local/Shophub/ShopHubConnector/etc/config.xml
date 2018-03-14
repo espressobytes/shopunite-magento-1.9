@@ -3,7 +3,7 @@
 
     <modules>
         <Shophub_ShopHubConnector>
-            <version>1.1.5</version>
+            <version>1.1.6</version>
         </Shophub_ShopHubConnector>
     </modules>
 
@@ -82,6 +82,23 @@
             <shophubconnector>
                 <class>Shophub_ShopHubConnector_Block</class>
             </shophubconnector>
+            <!-- Start: Rewrite blocks for showing external status in customer account -->
+            <sales>
+                <rewrite>
+                    <order_recent>Shophub_ShopHubConnector_Block_Sales_Order_Recent</order_recent>
+                </rewrite>
+            </sales>
+            <sales>
+                <rewrite>
+                    <order_history>Shophub_ShopHubConnector_Block_Sales_Order_History</order_history>
+                </rewrite>
+            </sales>
+            <sales>
+                <rewrite>
+                    <order_info>Shophub_ShopHubConnector_Block_Sales_Order_Info</order_info>
+                </rewrite>
+            </sales>
+            <!-- End: Rewrite blocks for showing external status in customer account -->
         </blocks>
         <helpers>
             <shophubconnector>
